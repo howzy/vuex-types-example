@@ -1,15 +1,14 @@
 import Vue from 'vue'
-import Vuex from 'vuex'
+import * as VuexTypes from '@/shared/vuex-types'
+import cart from './modules/cart'
+import products from './modules/products'
 
-Vue.use(Vuex)
+Vue.use(VuexTypes)
 
-export default new Vuex.Store({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
+export default VuexTypes.createStore({
+  root: {},
+  modules: [
+    cart,
+    products
+  ]
 })
