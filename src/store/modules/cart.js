@@ -20,7 +20,7 @@ export default {
       getters: {
         cartProducts: (state, getters, rootState) => {
           return state.items.map(({ id, quantity }) => {
-            const product = rootState.products.all.find(product => product.id === id)
+            const product = rootState.products.products.find(product => product.id === id)
             return {
               title: product.title,
               price: product.price,

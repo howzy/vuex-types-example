@@ -1,7 +1,8 @@
 <template>
   <ul>
+    <p v-if="productsLoading">Loading...</p>
     <li
-      v-for="product in products"
+      v-for="product in products.data"
       :key="product.id">
       {{ product.title }} - {{ product.price | currency}}
       <br>
@@ -17,9 +18,7 @@
 <script>
 export default {
   _mappedState: {
-    products: {
-      products: 'all'
-    }
+    products: ['products', 'productsLoading']
   },
   _mappedActions: {
     cart({ types }) {

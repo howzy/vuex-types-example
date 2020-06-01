@@ -3,33 +3,32 @@ import shop from '@/api/shop'
 export default {
   namespace: 'products',
   mapTypesToModule: [
-    'SET_PRODUCTS',
     'DECREMENT_PRODUCT_INVENTORY',
     'GET_ALL_PRODUCTS'
   ],
+  mapTargetsToModule: ['products'],
   mapDefinitionToModule({ types }) {
     return {
-      state: {
-        all: []
-      },
+      state: {},
 
       getters: {},
 
       mutations: {
-        [types.SET_PRODUCTS] (state, products) {
-          state.all = products
-        },
-
         [types.DECREMENT_PRODUCT_INVENTORY] (state, { id }) {
-          const product = state.all.find(product => product.id === id)
+          const product = state.products.find(product => product.id === id)
           product.inventory--
         }
       },
 
       actions: {
         [types.GET_ALL_PRODUCTS] ({ commit }) {
+          commit(types.SET_PRODUCTS_LOADING)
           shop.getProducts(products => {
-            commit(types.SET_PRODUCTS, products)
+            commit(types.SET_PRODUCTS_SUCCESS, {
+              data: {
+                data: products
+              }
+            })
           })
         }
       }
