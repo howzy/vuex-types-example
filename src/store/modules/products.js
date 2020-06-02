@@ -15,7 +15,7 @@ export default {
 
       mutations: {
         [types.DECREMENT_PRODUCT_INVENTORY] (state, { id }) {
-          const product = state.products.find(product => product.id === id)
+          const product = state.products.data.find(product => product.id === id)
           product.inventory--
         }
       },
